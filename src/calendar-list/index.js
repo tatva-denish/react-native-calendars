@@ -139,7 +139,7 @@ class CalendarList extends Component {
     this.listView.scrollToOffset({offset: scrollAmount, animated: false});
   }
 
-  getDerivedStateFromProps(props) {
+  componentWillReceiveProps(props) {
     const current = parseDate(this.props.current);
     const nextCurrent = parseDate(props.current);
     
@@ -184,7 +184,8 @@ class CalendarList extends Component {
       if (rowShouldBeRendered && !rowclone[i].getTime) {
         val = this.state.openDate.clone().addMonths(i - this.props.pastScrollRange, true);
       } else if (!rowShouldBeRendered) {
-        val = this.state.texts[i];
+        val = this.state.openDate.clone().addMonths(i - this.props.pastScrollRange, true); // Android fix for RTL
+        // val = this.state.texts[i];
       }
       newrows.push(val);
       if (rowIsCloseToViewable(i, 0)) {
