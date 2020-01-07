@@ -139,7 +139,7 @@ class CalendarList extends Component {
     this.listView.scrollToOffset({offset: scrollAmount, animated: false});
   }
 
-  componentWillReceiveProps(props) {
+  getDerivedStateFromProps(props) {
     const current = parseDate(this.props.current);
     const nextCurrent = parseDate(props.current);
     
